@@ -15,7 +15,7 @@ void* StackBlur::execute(void* input) {
     return input;
   }
 
-  unsigned int div = (kernel_size_ * 2) + 1;
+  unsigned int div = (radius * 2) + 1;
   auto stack = new unsigned char[div * 3 * cores_];
 
   if (cores_ == 1) {
@@ -28,7 +28,7 @@ void* StackBlur::execute(void* input) {
     std::vector<std::thread> workers(cores_);
     for (int i = 0; i < cores_; i++) {
       workers[i] = std::thread(StackBlurJob, (unsigned char*)input, width_,
-                               height_, radius, cores_, i, 1, stack);
+                               height_, radius, cores_, i, 1, stack + div * 3 * i);
     }
     for (auto& worker : workers) {
       worker.join();
@@ -36,12 +36,12 @@ void* StackBlur::execute(void* input) {
 
     for (int i = 0; i < cores_; i++) {
       workers[i] = std::thread(StackBlurJob, (unsigned char*)input, width_,
-                               height_, radius, cores_, i, 2, stack);
+                               height_, radius, cores_, i, 2, stack + div * 3 * i);
     }
     for (auto& worker : workers) {
       worker.join();
     }
   }
-
+  delete[] stack;
   return input;
 }

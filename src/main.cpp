@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
   CVBlur cv_filter(image.cols, image.rows, image.channels(), 3);
   auto result_cv = cv_filter.measure(image.clone(), 100);
 
-  StackBlur stack_filter(image.cols, image.rows, image.channels(), 3, 1);
+  StackBlur stack_filter(image.cols, image.rows, image.channels(), 3, 8);
   auto result_stack = stack_filter.measure(image.clone(), 100);
 
   //  auto diff_stack = result_stack - result_cv;

@@ -16,8 +16,9 @@ cv::Mat BaseFilter::measure(const cv::Mat& input, const int& count) {
   long long microseconds(0);
   // execute
   for (auto i = 0; i < count; ++i) {
+    cv::Mat input_clone = input.clone();
     auto start = std::chrono::steady_clock::now();
-    target = execute(input.data);
+    target = execute(input_clone.data);
     auto elapsed = std::chrono::steady_clock::now() - start;
     microseconds +=
         std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
