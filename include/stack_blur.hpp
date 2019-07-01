@@ -64,7 +64,6 @@ static void StackBlurJob(
   unsigned long sum_out_r;
   unsigned long sum_out_g;
   unsigned long sum_out_b;
-  unsigned long sum_out_a;
 
   unsigned int wm = w - 1;
   unsigned int hm = h - 1;
@@ -79,7 +78,7 @@ static void StackBlurJob(
 
     for (y = minY; y < maxY; y++) {
       sum_r = sum_g = sum_b = sum_in_r = sum_in_g = sum_in_b = sum_out_r =
-          sum_out_g = sum_out_b = sum_out_a = 0;
+          sum_out_g = sum_out_b = 0;
 
       src_ptr = src + w3 * y;  // start of line (0,y)
 
@@ -170,7 +169,7 @@ static void StackBlurJob(
 
     for (x = minX; x < maxX; x++) {
       sum_r = sum_g = sum_b = sum_in_r = sum_in_g = sum_in_b = sum_out_r =
-          sum_out_g = sum_out_b = sum_out_a = 0;
+          sum_out_g = sum_out_b = 0;
 
       src_ptr = src + 3 * x;  // x,0
       for (i = 0; i <= radius; i++) {
@@ -254,6 +253,11 @@ static void StackBlurJob(
   }
 }
 
+/**
+ * @brief StackBlur
+ *
+ * refer to http://vitiy.info/Code/stackblur.cpp
+ */
 class StackBlur : public BaseFilter {
  public:
   StackBlur(const int& width, const int& height, const int& channels,

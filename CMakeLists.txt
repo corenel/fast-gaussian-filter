@@ -17,6 +17,7 @@ add_executable(${PROJECT_NAME}
     src/base.cpp
     src/cv_blur.cpp
     src/stack_blur.cpp
+    src/fastest_blur.cpp
     src/main.cpp
     )
 
