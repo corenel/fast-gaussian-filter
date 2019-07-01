@@ -25,21 +25,21 @@ void* StackBlur::execute(void* input) {
     StackBlurJob((unsigned char*)input, width_, height_, radius, 1, 0, 2,
                  stack);
   } else {
-    std::vector<std::thread*> workers(cores_);
+    std::vector<std::thread> workers(cores_);
     for (int i = 0; i < cores_; i++) {
-      workers[i] = new std::thread(StackBlurJob, (unsigned char*)input, width_,
-                                   height_, radius, cores_, i, 1, stack);
+      workers[i] = std::thread(StackBlurJob, (unsigned char*)input, width_,
+                               height_, radius, cores_, i, 1, stack);
     }
-    for (int i = 0; i < cores_; i++) {
-      workers[i]->join();
+    for (auto& worker : workers) {
+      worker.join();
     }
 
     for (int i = 0; i < cores_; i++) {
-      workers[i] = new std::thread(StackBlurJob, (unsigned char*)input, width_,
-                                   height_, radius, cores_, i, 2, stack);
+      workers[i] = std::thread(StackBlurJob, (unsigned char*)input, width_,
+                               height_, radius, cores_, i, 2, stack);
     }
-    for (int i = 0; i < cores_; i++) {
-      workers[i]->join();
+    for (auto& worker : workers) {
+      worker.join();
     }
   }
 
