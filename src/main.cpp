@@ -1,7 +1,8 @@
 #include <tclap/CmdLine.h>
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include "cv_gaussian_blur.hpp"
+#include "cv_blur.hpp"
+#include "stack_blur.hpp"
 
 int main(int argc, char** argv) {
   // Parse arguments
@@ -31,10 +32,14 @@ int main(int argc, char** argv) {
     std::cout << "Image path: " << image_path << std::endl;
   }
 
-  CVGaussianBlur cv_filter(image.cols, image.rows, image.channels());
+  CVBlur cv_filter(image.cols, image.rows, image.channels());
   auto result_cv = cv_filter.measure(image.clone());
 
+  StackBlur stack_filter(image.cols, image.rows, image.channels());
+  auto result_stack = stack_filter.measure(image.clone());
+
   cv::imshow("Blurred by OpenCV", result_cv);
-  // cv::imshow("Original", image);
+  cv::imshow("Blurred by StackBlur", result_stack);
+  cv::imshow("Original", image);
   cv::waitKey(0);
 }

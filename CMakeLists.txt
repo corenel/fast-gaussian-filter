@@ -15,7 +15,8 @@ include_directories(
 
 add_executable(${PROJECT_NAME}
     src/base.cpp
-    src/cv_gaussian_blur.cpp
+    src/cv_blur.cpp
+    src/stack_blur.cpp
     src/main.cpp
     )
 

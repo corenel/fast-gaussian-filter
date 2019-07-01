@@ -1,9 +1,9 @@
 #pragma once
 #include "base.hpp"
 
-class CVGaussianBlur : public BaseFilter {
+class CVBlur : public BaseFilter {
  public:
-  CVGaussianBlur(const int& width, const int& height, const int& channels,
+  CVBlur(const int& width, const int& height, const int& channels,
                  const int& kernel_size = 3);
   void* execute(void* input) override;
 };
