@@ -257,11 +257,9 @@ static void StackBlurJob(
 class StackBlur : public BaseFilter {
  public:
   StackBlur(const int& width, const int& height, const int& channels,
-            const int& kernel_size = 3, const int& cores = 1,
-            const int& core = 1);
+            const int& kernel_size = 3, const int& cores = 1);
   void* execute(void* input) override;
 
  private:
   int cores_;
-  int core_;
 };

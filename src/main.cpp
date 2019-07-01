@@ -32,14 +32,20 @@ int main(int argc, char** argv) {
     std::cout << "Image path: " << image_path << std::endl;
   }
 
-  CVBlur cv_filter(image.cols, image.rows, image.channels());
-  auto result_cv = cv_filter.measure(image.clone());
+  CVBlur cv_filter(image.cols, image.rows, image.channels(), 3);
+  auto result_cv = cv_filter.measure(image.clone(), 1);
 
-  StackBlur stack_filter(image.cols, image.rows, image.channels());
-  auto result_stack = stack_filter.measure(image.clone());
+  StackBlur stack_filter(image.cols, image.rows, image.channels(), 3, 1);
+  auto result_stack = stack_filter.measure(image.clone(), 10);
 
-  cv::imshow("Blurred by OpenCV", result_cv);
-  cv::imshow("Blurred by StackBlur", result_stack);
-  cv::imshow("Original", image);
-  cv::waitKey(0);
+  //  auto diff_stack = result_stack - result_cv;
+  //  std::cout << "Total diff between OpenCV and StackBlur: " <<
+  //  cv::sum(diff_stack) << std::endl; std::cout << "Mean diff between OpenCV
+  //  and StackBlur: " << cv::mean(diff_stack) << std::endl;
+
+  //  cv::imshow("Blurred by OpenCV", result_cv);
+  //  cv::imshow("Blurred by StackBlur", result_stack);
+  //  cv::imshow("Diff between OpenCV and StackBlur", result_stack);
+  //  cv::imshow("Original", image);
+  //  cv::waitKey(0);
 }
