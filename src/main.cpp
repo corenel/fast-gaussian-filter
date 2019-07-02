@@ -31,16 +31,18 @@ int main(int argc, char** argv) {
     std::cerr << "Invalid image path: " << image_path << std::endl;
   } else {
     std::cout << "Image path: " << image_path << std::endl;
+    std::cout << "Image shape: " << image.cols << "x" << image.rows << "x"
+              << image.channels() << std::endl;
   }
 
-  //  CVBlur cv_filter(image.cols, image.rows, image.channels(), 3);
-  //  auto result_cv = cv_filter.measure(image.clone(), 100);
-  //
-  //  StackBlur stack_filter(image.cols, image.rows, image.channels(), 3, 8);
-  //  auto result_stack = stack_filter.measure(image.clone(), 100);
+  CVBlur cv_filter(image.cols, image.rows, image.channels(), 3);
+  auto result_cv = cv_filter.measure(image.clone(), 100);
+
+  StackBlur stack_filter(image.cols, image.rows, image.channels(), 3, 1);
+  auto result_stack = stack_filter.measure(image.clone(), 100);
 
   FastestBlur fastest_filter(image.cols, image.rows, image.channels(), 3);
-  auto result_fastest = fastest_filter.measure(image.clone(), 1);
+  auto result_fastest = fastest_filter.measure(image.clone(), 100);
 
   //  auto diff_stack = result_stack - result_cv;
   //  std::cout << "Total diff between OpenCV and StackBlur: " <<
@@ -49,8 +51,8 @@ int main(int argc, char** argv) {
 
   //  cv::imshow("Blurred by OpenCV", result_cv);
   //  cv::imshow("Blurred by StackBlur", result_stack);
-  cv::imshow("Blurred by Fastest", result_fastest);
+  //  cv::imshow("Blurred by Fastest", result_fastest);
   //  cv::imshow("Diff between OpenCV and StackBlur", result_stack);
   //  cv::imshow("Original", image);
-  cv::waitKey(0);
+  //  cv::waitKey(0);
 }
