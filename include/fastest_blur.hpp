@@ -169,6 +169,11 @@ static void box_blur(unsigned char* source, unsigned char* target, int w, int h,
   box_blur_t(source, target, w, h, radius);
 }
 
+/**
+ * @brief "Fastesr" Gaussian Blur (in linear time)
+ *
+ * Refer to http://blog.ivank.net/fastest-gaussian-blur.html
+ */
 class FastestBlur : public BaseFilter {
  public:
   FastestBlur(const int& width, const int& height, const int& channels,

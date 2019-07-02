@@ -40,3 +40,9 @@ Where:
 | [StackBlur](http://vitiy.info/stackblur-algorithm-multi-threaded-blur-for-cpp/) (single core) | 3.2774              |
 | [FastestBlur](http://blog.ivank.net/fastest-gaussian-blur.html) | 8.2725              |
 
+## Acknowledgement
+
+- [Fastest Gaussian Blur (in linear time)](http://blog.ivank.net/fastest-gaussian-blur.html)
+- [Antonionni/ITMOUniversity_ASM](https://github.com/Antonionni/ITMOUniversity_ASM)
+- [Stackblur – C++ multi-threaded version of fast blur algorithm](http://vitiy.info/stackblur-algorithm-multi-threaded-blur-for-cpp/)
+
